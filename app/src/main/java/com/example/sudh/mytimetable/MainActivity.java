@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                Log.d(TAG, "onClick: hahaha");
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,1);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
+                Log.d(TAG, "onClick: hahaha");
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,2);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -61,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,3);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -68,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,4);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -75,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,5);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -82,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
+                intent.putExtra(courseEntry.COLUMN_SLOT_ID,6);
+                intent.putExtra(courseEntry.COLUMN_DAY_ID,1);
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -89,18 +103,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void InitTableData(){
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        database.delete(courseEntry.TABLE_NAME,null,null); // before updating delete all entries
-        for(int i=1;i<=6;i++){
-            ContentValues values = new ContentValues();
-            values.put(courseEntry.COLUMN_SLOT_ID,i);       // enter slot id (1 for 9am)
-            values.put(courseEntry.COLUMN_DAY_ID,1);        // enter day id (1 for monday)
-            values.put(courseEntry.COLUMN_NAME,"");
-            values.put(courseEntry.COLUMN_CODE,"");
-            values.put(courseEntry.COLUMN_ROOM,"");
-            values.put(courseEntry.COLUMN_PROF,"");
-            values.put(courseEntry.COLUMN_NOTES,"");
+        String count = "SELECT count(*) FROM "+courseEntry.TABLE_NAME;
+        Cursor mcursor = database.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount==0) {                                     // initialise only if table is empty
+            for (int i = 1; i <= 6; i++) {
+                ContentValues values = new ContentValues();
+                values.put(courseEntry.COLUMN_SLOT_ID, i);       // enter slot id (1 for 9am)
+                values.put(courseEntry.COLUMN_DAY_ID, 1);        // enter day id (1 for monday)
+                values.put(courseEntry.COLUMN_NAME, "");
+                values.put(courseEntry.COLUMN_CODE, "");
+                values.put(courseEntry.COLUMN_ROOM, "");
+                values.put(courseEntry.COLUMN_PROF, "");
+                values.put(courseEntry.COLUMN_NOTES, "");
 
-            database.insert(courseEntry.TABLE_NAME,null,values);
+                database.insert(courseEntry.TABLE_NAME, null, values);
+            }
         }
     }
 
@@ -113,18 +132,41 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "displayContent: i came here");
         TextView one_name = (TextView) findViewById(R.id.slot_one_course);
         TextView one_room = (TextView) findViewById(R.id.slot_one_class);
+        TextView two_name = (TextView) findViewById(R.id.slot_two_course);
+        TextView two_room = (TextView) findViewById(R.id.slot_two_class);
+        TextView three_name = (TextView) findViewById(R.id.slot_three_course);
+        TextView three_room = (TextView) findViewById(R.id.slot_three_class);
+        TextView four_name = (TextView) findViewById(R.id.slot_four_course);
+        TextView four_room = (TextView) findViewById(R.id.slot_four_class);
+        TextView five_name = (TextView) findViewById(R.id.slot_five_course);
+        TextView five_room = (TextView) findViewById(R.id.slot_five_class);
+        TextView six_name = (TextView) findViewById(R.id.slot_six_course);
+        TextView six_room = (TextView) findViewById(R.id.slot_six_class);
 
-        Log.d(TAG, "displayContent: i came here");
         String[] selectionArgs = new String[]{
-                String.valueOf(1)
+                String.valueOf(1)                           //////// get cursor depending on which day it is
         };
-        Log.d(TAG, "displayContent: i came here");
-        cursor = database.query(courseEntry.TABLE_NAME,columns,courseEntry.COLUMN_SLOT_ID+"=?",selectionArgs,null,null,null);
+        cursor = database.query(courseEntry.TABLE_NAME,columns,courseEntry.COLUMN_DAY_ID+"=?",selectionArgs,null,null,null);
         cursor.moveToFirst();
-        Log.d(TAG, "displayContent: i came here");
         // set the layout fields according to data values
         one_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
         one_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        cursor.moveToNext();
+        two_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        two_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        cursor.moveToNext();
+        three_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        three_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        cursor.moveToNext();
+        four_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        four_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        cursor.moveToNext();
+        five_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        five_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        cursor.moveToNext();
+        six_name.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        six_room.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+
         cursor.close();
     }
 }

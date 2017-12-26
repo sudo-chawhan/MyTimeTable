@@ -65,6 +65,7 @@
     </LinearLayout>
 
    <EditText
+       android:id="@+id/edit_course_notes"
        android:layout_marginTop="16dp"
        android:layout_width="match_parent"
        android:layout_height="0dp"

@@ -1,5 +1,6 @@
 package com.example.sudh.mytimetable.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -21,6 +22,8 @@ public class courseDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(FeedEntry.CMD_CREATE_NEW_TABLE);
+        // initialise the database
+        //InitTableData(sqLiteDatabase);
     }
 
     @Override
@@ -41,4 +44,6 @@ public class courseDbHelper extends SQLiteOpenHelper{
                 "," + courseEntry.COLUMN_NOTES + " TEXT" +
                 "," + courseEntry.COLUMN_PROF + " TEXT);";
     }
+
+
 }
