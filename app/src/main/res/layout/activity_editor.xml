@@ -30,6 +30,7 @@
         <!-- Label -->
         <TextView
             android:text="Course"
+            android:textAppearance="?android:textAppearanceLarge"
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->
@@ -44,19 +45,16 @@
             <EditText
                 android:id="@+id/edit_course_name"
                 android:hint="Name"
-                android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_course_code"
                 android:hint="Code"
-                android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
             <EditText
                 android:id="@+id/edit_course_room"
                 android:hint="Room"
-                android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
             <EditText
                 android:id="@+id/edit_course_prof"
@@ -67,8 +65,13 @@
     </LinearLayout>
 
    <EditText
+       android:layout_marginTop="16dp"
        android:layout_width="match_parent"
        android:layout_height="0dp"
        android:layout_weight="1"
-       android:inputType="textMultiLine"/>
+       android:inputType="textMultiLine"
+       android:hint="Notes"
+       android:padding="8dp"
+       android:gravity="start"
+       android:background="@android:color/white"/>
 </LinearLayout>
