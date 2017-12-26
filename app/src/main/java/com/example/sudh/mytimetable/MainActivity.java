@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: i came here");
         setListeners();
         Log.d(TAG, "onCreate: i came here");
@@ -47,42 +47,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
         slot_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
         slot_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
         slot_four.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
         slot_five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
         slot_six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,EditorActivity.class);
-                startActivity(intent);
+                MainActivity.this.startActivity(intent);
             }
         });
     }
