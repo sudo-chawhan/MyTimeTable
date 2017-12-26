@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_editor);
         Log.d(TAG, "onCreate: i came here");
         setListeners();
         Log.d(TAG, "onCreate: i came here");
@@ -89,13 +89,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void InitTableData(){
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        database.delete(courseEntry.TABLE_NAME,null,null); // before updating delete all entries
         for(int i=1;i<=6;i++){
             ContentValues values = new ContentValues();
             values.put(courseEntry.COLUMN_SLOT_ID,i);       // enter slot id (1 for 9am)
             values.put(courseEntry.COLUMN_DAY_ID,1);        // enter day id (1 for monday)
-            values.put(courseEntry.COLUMN_NAME,"popl");
-            values.put(courseEntry.COLUMN_CODE,"cs2440");
-            values.put(courseEntry.COLUMN_ROOM,"A-119");
+            values.put(courseEntry.COLUMN_NAME,"");
+            values.put(courseEntry.COLUMN_CODE,"");
+            values.put(courseEntry.COLUMN_ROOM,"");
             values.put(courseEntry.COLUMN_PROF,"");
             values.put(courseEntry.COLUMN_NOTES,"");
 
