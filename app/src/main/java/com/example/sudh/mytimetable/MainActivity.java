@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: i came here");
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayContent();
+    }
+
     public void setListeners(){
         // setting layout references
         LinearLayout slot_one = (LinearLayout) findViewById(R.id.slot_one);
