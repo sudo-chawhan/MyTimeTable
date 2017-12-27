@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void setListeners(){
         // setting layout references
-        RelativeLayout slot_one = (RelativeLayout) findViewById(R.id.slot_one);
-        RelativeLayout slot_two = (RelativeLayout) findViewById(R.id.slot_two);
-        RelativeLayout slot_three = (RelativeLayout) findViewById(R.id.slot_three);
-        RelativeLayout slot_four = (RelativeLayout) findViewById(R.id.slot_four);
-        RelativeLayout slot_five = (RelativeLayout) findViewById(R.id.slot_five);
-        RelativeLayout slot_six = (RelativeLayout) findViewById(R.id.slot_six);
+        LinearLayout slot_one = (LinearLayout) findViewById(R.id.slot_one);
+        LinearLayout slot_two = (LinearLayout) findViewById(R.id.slot_two);
+        LinearLayout slot_three = (LinearLayout) findViewById(R.id.slot_three);
+        LinearLayout slot_four = (LinearLayout) findViewById(R.id.slot_four);
+        LinearLayout slot_five = (LinearLayout) findViewById(R.id.slot_five);
+        LinearLayout slot_six = (LinearLayout) findViewById(R.id.slot_six);
 
         //setting on clock listeners for each slot
         slot_one.setOnClickListener(new View.OnClickListener() {
@@ -103,11 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void InitTableData(){
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        Log.d(TAG, "InitTableData: here its cmae");
         String count = "SELECT count(*) FROM "+courseEntry.TABLE_NAME;
+        Log.d(TAG, "InitTableData: problem with count");
         Cursor mcursor = database.rawQuery(count, null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
-        if(icount==0) {                                     // initialise only if table is empty
+        if(icount==0) {
+            Log.d(TAG, "InitTableData: never came hereakdalfjalf");// initialise only if table is empty
             for (int i = 1; i <= 6; i++) {
                 ContentValues values = new ContentValues();
                 values.put(courseEntry.COLUMN_SLOT_ID, i);       // enter slot id (1 for 9am)

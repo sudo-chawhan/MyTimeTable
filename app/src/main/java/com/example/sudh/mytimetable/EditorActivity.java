@@ -23,12 +23,8 @@ import com.example.sudh.mytimetable.data.courseDbHelper;
 public class EditorActivity extends AppCompatActivity {
 
     private String TAG = "EditorActivity";
-    
-    EditText mName = (EditText) findViewById(R.id.edit_course_name);
-    EditText mCode = (EditText) findViewById(R.id.edit_course_code);
-    EditText mRoom = (EditText) findViewById(R.id.edit_course_room);
-    EditText mProf = (EditText) findViewById(R.id.edit_course_prof);
-    EditText mNotes = (EditText) findViewById(R.id.edit_course_notes);
+
+
     Intent mIntent;
     courseDbHelper mDbHelper = new courseDbHelper(this);
     @Override
@@ -39,6 +35,7 @@ public class EditorActivity extends AppCompatActivity {
         mIntent = getIntent();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_editor,menu);
@@ -48,11 +45,12 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
-            case R.string.action_save:
+            case R.id.action_save:
                 updateCourse();
+                Log.d(TAG, "onOptionsItemSelected: save icon is pressed but never came here");
                 finish();
                 return true;
-            case R.string.action_delete:
+            case R.id.action_delete:
                 return true;
 
         }
@@ -63,12 +61,18 @@ public class EditorActivity extends AppCompatActivity {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
+        EditText mName = (EditText) findViewById(R.id.edit_course_name);
+        EditText mCode = (EditText) findViewById(R.id.edit_course_code);
+        EditText mRoom = (EditText) findViewById(R.id.edit_course_room);
+        EditText mProf = (EditText) findViewById(R.id.edit_course_prof);
+        EditText mNotes = (EditText) findViewById(R.id.edit_course_notes);
+
         String name = mName.getText().toString().trim();
         String code = mCode.getText().toString().trim();
         String room = mRoom.getText().toString().trim();
         String prof = mProf.getText().toString().trim();
         String notes = mNotes.getText().toString().trim();
-
+        Log.d(TAG, "updateCourse: string value is name "+name);
         ContentValues values = new ContentValues();
         values.put(courseEntry.COLUMN_NAME,name);
         values.put(courseEntry.COLUMN_CODE,code);
@@ -82,7 +86,7 @@ public class EditorActivity extends AppCompatActivity {
         String[] selectionArgs = new String[]{
                 String.valueOf(slot_id), String.valueOf(day_id)
         };
-
+        Log.d(TAG, "updateCourse: int slot id in intent"+slot_id);
         database.update(courseEntry.TABLE_NAME,values,courseEntry.COLUMN_SLOT_ID + "= ? AND "+courseEntry.COLUMN_DAY_ID +"= ?",selectionArgs);
 
     }

@@ -8,10 +8,11 @@
     tools:context="com.example.sudh.mytimetable.MainActivity">
 
     <!--each individual list views hardcoded -->
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_one"
+        android:orientation="horizontal"
         android:padding="8dp">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,34 +40,37 @@
             </LinearLayout>
         </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="16dp">
         <TextView
             android:id="@+id/slot_one_course"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Intro to data structures"
+            android:gravity="end"
+            android:text="jflksjflksajfkslakfjlskafjkdj"
             />
 
         <TextView
             android:id="@+id/slot_one_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Auditorium"
+            android:text="sdfsdfsfsdfsf"
+            android:gravity="end"
             android:layout_gravity="end"
         />
     </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_two"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:orientation="horizontal">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,16 +97,19 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp">
             <TextView
                 android:id="@+id/slot_two_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:gravity="end"
                 android:text="Intro to data structures"
                 />
 
@@ -111,13 +118,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Auditorium"
+                android:gravity="end"
                 android:layout_gravity="end"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_three"
         android:padding="8dp">
@@ -147,16 +155,19 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp">
             <TextView
                 android:id="@+id/slot_three_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:gravity="end"
                 android:text="Intro to data structures"
                 />
 
@@ -165,13 +176,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Auditorium"
+                android:gravity="end"
                 android:layout_gravity="end"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_four"
         android:padding="8dp">
@@ -201,16 +213,19 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp">
             <TextView
                 android:id="@+id/slot_four_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:gravity="end"
                 android:text="Intro to data structures"
                 />
 
@@ -219,15 +234,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Auditorium"
+                android:gravity="end"
                 android:layout_gravity="end"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:padding="8dp"
         android:background="@android:color/holo_orange_dark">
 
@@ -243,8 +261,8 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_five"
         android:padding="8dp">
@@ -274,16 +292,19 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp">
             <TextView
                 android:id="@+id/slot_five_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:gravity="end"
                 android:text="Intro to data structures"
                 />
 
@@ -292,13 +313,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Auditorium"
+                android:gravity="end"
                 android:layout_gravity="end"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/slot_six"
         android:padding="8dp">
@@ -328,16 +350,19 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp">
             <TextView
                 android:id="@+id/slot_six_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:gravity="end"
                 android:text="Intro to data structures"
                 />
 
@@ -346,10 +371,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Auditorium"
+                android:gravity="end"
                 android:layout_gravity="end"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
