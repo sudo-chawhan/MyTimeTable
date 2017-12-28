@@ -2,6 +2,7 @@ package com.example.sudh.mytimetable;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -24,6 +25,11 @@ public class EditorActivity extends AppCompatActivity {
 
     private String TAG = "EditorActivity";
 
+    EditText mName;
+    EditText mCode;
+    EditText mRoom;
+    EditText mProf;
+    EditText mNotes;
 
     Intent mIntent;
     courseDbHelper mDbHelper = new courseDbHelper(this);
@@ -31,8 +37,13 @@ public class EditorActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-        Log.d(TAG, "onCreate: halelujahya");
+        mName = (EditText) findViewById(R.id.edit_course_name);
+         mCode = (EditText) findViewById(R.id.edit_course_code);
+         mRoom = (EditText) findViewById(R.id.edit_course_room);
+         mProf = (EditText) findViewById(R.id.edit_course_prof);
+         mNotes = (EditText) findViewById(R.id.edit_course_notes);
         mIntent = getIntent();
+        showView();
     }
 
 
@@ -61,12 +72,6 @@ public class EditorActivity extends AppCompatActivity {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        EditText mName = (EditText) findViewById(R.id.edit_course_name);
-        EditText mCode = (EditText) findViewById(R.id.edit_course_code);
-        EditText mRoom = (EditText) findViewById(R.id.edit_course_room);
-        EditText mProf = (EditText) findViewById(R.id.edit_course_prof);
-        EditText mNotes = (EditText) findViewById(R.id.edit_course_notes);
-
         String name = mName.getText().toString().trim();
         String code = mCode.getText().toString().trim();
         String room = mRoom.getText().toString().trim();
@@ -88,6 +93,25 @@ public class EditorActivity extends AppCompatActivity {
         };
         Log.d(TAG, "updateCourse: int slot id in intent"+slot_id);
         database.update(courseEntry.TABLE_NAME,values,courseEntry.COLUMN_SLOT_ID + "= ? AND "+courseEntry.COLUMN_DAY_ID +"= ?",selectionArgs);
+
+    }
+    private void showView(){
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        int slot_id = mIntent.getIntExtra(courseEntry.COLUMN_SLOT_ID,-1);
+        int day_id = mIntent.getIntExtra(courseEntry.COLUMN_DAY_ID,-1);
+
+        String[] selectionArgs = new String[]{
+                String.valueOf(slot_id), String.valueOf(day_id)
+        };
+        Cursor cursor = database.query(courseEntry.TABLE_NAME,null,courseEntry.COLUMN_SLOT_ID + "= ? AND "+courseEntry.COLUMN_DAY_ID +"= ?",selectionArgs,null,null,null);
+        cursor.moveToFirst();
+        mName.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NAME)));
+        mCode.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_CODE)));
+        mRoom.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_ROOM)));
+        mProf.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_PROF)));
+        mNotes.setText(cursor.getString(cursor.getColumnIndex(courseEntry.COLUMN_NOTES)));
+
+        cursor.close();
 
     }
 }
