@@ -14,24 +14,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+
 
 import com.example.sudh.mytimetable.data.courseDbHelper;
-import com.example.sudh.mytimetable.data.courseContract.courseEntry;
-
 import com.example.sudh.mytimetable.data.courseContract;
-import com.example.sudh.mytimetable.data.courseDbHelper;
+
 
 /**
  * Created by sudo-chawhan on 04/01/18.
@@ -40,12 +27,19 @@ import com.example.sudh.mytimetable.data.courseDbHelper;
 public class monFragment extends android.support.v4.app.Fragment {
 
     private String TAG = "MainActivity";
-    courseDbHelper mDbHelper = new courseDbHelper(getActivity());
+    courseDbHelper mDbHelper;
     View rootView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        rootView =  inflater.inflate(R.layout.activity_main,container,false);
+        rootView =  inflater.inflate(R.layout.mon_fragment,container,false);
+        Log.d(TAG, "onCreateView: before init table");
+        mDbHelper = new courseDbHelper(getActivity().getApplicationContext());
+        InitTableData();
+        Log.d(TAG, "onCreateView: before set listener");
+        setListeners();
+        Log.d(TAG, "onCreateView: before display content");
+        displayContent();
         return rootView;
     }
     @Override
@@ -62,7 +56,7 @@ public class monFragment extends android.support.v4.app.Fragment {
         LinearLayout slot_four = (LinearLayout) rootView.findViewById(R.id.slot_four);
         LinearLayout slot_five = (LinearLayout) rootView.findViewById(R.id.slot_five);
         LinearLayout slot_six = (LinearLayout) rootView.findViewById(R.id.slot_six);
-
+        if(slot_one==null) Log.d(TAG, "setListeners: after setiing up view ids *");
         //setting on clock listeners for each slot
         slot_one.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +118,7 @@ public class monFragment extends android.support.v4.app.Fragment {
     }
 
     public void InitTableData(){
+        Log.d(TAG, "InitTableData: before getWritableDatabase");
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         Log.d(TAG, "InitTableData: here its cmae");
         String count = "SELECT count(*) FROM "+ courseContract.courseEntry.TABLE_NAME;
