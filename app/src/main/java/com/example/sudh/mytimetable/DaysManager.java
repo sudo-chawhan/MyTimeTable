@@ -23,19 +23,19 @@ public class DaysManager extends FragmentPagerAdapter {
     public android.support.v4.app.Fragment getItem(int position) {
         if(position==0){
             return new monFragment();
-        }
-        else return null;
+        }else return new tueFragment();
+
     }
 
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
             return "mon";
-        }else return "";
+        }else return "tue";
     }
 }

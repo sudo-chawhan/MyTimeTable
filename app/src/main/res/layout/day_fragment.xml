@@ -268,6 +268,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:background="#000000"
         android:padding="8dp"
         >
 
@@ -275,7 +276,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LUNCH BREAK"
-            android:background="@android:color/black"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:gravity="center"

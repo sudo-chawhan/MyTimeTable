@@ -22,12 +22,12 @@ import com.example.sudh.mytimetable.data.courseContract;
  * Created by sudo-chawhan on 04/01/18.
  */
 
-public class monFragment extends android.support.v4.app.Fragment {
+public class tueFragment extends android.support.v4.app.Fragment {
 
     private String TAG = "MainActivity";
+    int currentDayId=2;
     courseDbHelper mDbHelper;
     View rootView;
-    int currentDayId=1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,1);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
                 Log.d(TAG, "onClick: hahaha");
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
         slot_two.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +75,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),EditorActivity.class);
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,2);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
         slot_three.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),EditorActivity.class);
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,3);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
         slot_four.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),EditorActivity.class);
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,4);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
         slot_five.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +102,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),EditorActivity.class);
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,5);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
         slot_six.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +111,7 @@ public class monFragment extends android.support.v4.app.Fragment {
                 Intent intent = new Intent(getActivity(),EditorActivity.class);
                 intent.putExtra(courseContract.courseEntry.COLUMN_SLOT_ID,6);
                 intent.putExtra(courseContract.courseEntry.COLUMN_DAY_ID,currentDayId);
-                monFragment.this.startActivity(intent);
+                tueFragment.this.startActivity(intent);
             }
         });
     }
