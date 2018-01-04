@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,19 +72,21 @@ public class EditorActivity extends AppCompatActivity {
     private void updateCourse(){
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-
+        int isEmpty=0;
         String name = mName.getText().toString().trim();
         String code = mCode.getText().toString().trim();
         String room = mRoom.getText().toString().trim();
         String prof = mProf.getText().toString().trim();
         String notes = mNotes.getText().toString().trim();
         Log.d(TAG, "updateCourse: string value is name "+name);
+        if(TextUtils.isEmpty(name)&&TextUtils.isEmpty(room)) isEmpty=1;
         ContentValues values = new ContentValues();
         values.put(courseEntry.COLUMN_NAME,name);
         values.put(courseEntry.COLUMN_CODE,code);
         values.put(courseEntry.COLUMN_ROOM,room);
         values.put(courseEntry.COLUMN_PROF,prof);
         values.put(courseEntry.COLUMN_NOTES,notes);
+        values.put(courseEntry.IS_EMPTY,isEmpty);
 
         int slot_id = mIntent.getIntExtra(courseEntry.COLUMN_SLOT_ID,-1);
         int day_id = mIntent.getIntExtra(courseEntry.COLUMN_DAY_ID,-1);

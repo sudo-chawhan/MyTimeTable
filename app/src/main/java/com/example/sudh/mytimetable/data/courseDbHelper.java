@@ -38,12 +38,11 @@ public class courseDbHelper extends SQLiteOpenHelper{
                 courseEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT" +
                 "," + courseEntry.COLUMN_SLOT_ID + " INTEGER NOT NULL" +
                 "," + courseEntry.COLUMN_DAY_ID + " INTEGER NOT NULL" +
+                "," + courseEntry.IS_EMPTY + " INTEGER DEFAULT 1" +
                 "," + courseEntry.COLUMN_NAME + " TEXT" +
                 "," + courseEntry.COLUMN_CODE + " TEXT" +
                 "," + courseEntry.COLUMN_ROOM + " TEXT" +
                 "," + courseEntry.COLUMN_NOTES + " TEXT" +
                 "," + courseEntry.COLUMN_PROF + " TEXT);";
     }
-
-
 }

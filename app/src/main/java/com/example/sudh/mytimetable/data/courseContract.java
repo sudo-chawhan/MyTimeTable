@@ -17,5 +17,6 @@ public final class courseContract {
         public static final String COLUMN_ROOM = "room";
         public static final String COLUMN_PROF = "prof";
         public static final String COLUMN_NOTES = "notes";
+        public static final String IS_EMPTY = "is_empty";
     }
 }
