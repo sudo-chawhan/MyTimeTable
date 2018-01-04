@@ -359,7 +359,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="05"
+                android:text="04"
                 style="@style/time_main"
                 android:paddingRight="8dp"
                 android:textSize="44sp"/>
@@ -371,7 +371,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/time_main"
-                    android:text=":30"/>
+                    android:text=":00"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
