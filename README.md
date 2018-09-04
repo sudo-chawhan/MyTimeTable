@@ -1,5 +1,6 @@
 # MyTimeTable
-An android app used to set my everyday college time table
 
-# Version 1
-The app with an editable time table for each day.
+An android app that stores my college time table. Editable.
+
+## About-
+* IDE - Android Studio
