@@ -63,10 +63,42 @@ public class EditorActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_delete:
+                eraseCourse();
+                finish();
                 return true;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    private void eraseCourse(){
+        // substitue all values as "" in the dataset of the entry
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        int isEmpty=0;
+        String name = "";
+        String code = "";
+        String room = "";
+        String prof = "";
+        String notes = "";
+        Log.d(TAG, "updateCourse: string value is name "+name);
+        if(TextUtils.isEmpty(name)&&TextUtils.isEmpty(room)) isEmpty=1;
+        ContentValues values = new ContentValues();
+        values.put(courseEntry.COLUMN_NAME,name);
+        values.put(courseEntry.COLUMN_CODE,code);
+        values.put(courseEntry.COLUMN_ROOM,room);
+        values.put(courseEntry.COLUMN_PROF,prof);
+        values.put(courseEntry.COLUMN_NOTES,notes);
+        values.put(courseEntry.IS_EMPTY,isEmpty);
+
+        int slot_id = mIntent.getIntExtra(courseEntry.COLUMN_SLOT_ID,-1);
+        int day_id = mIntent.getIntExtra(courseEntry.COLUMN_DAY_ID,-1);
+
+        String[] selectionArgs = new String[]{
+                String.valueOf(slot_id), String.valueOf(day_id)
+        };
+        Log.d(TAG, "updateCourse: int slot id in intent"+slot_id);
+        database.update(courseEntry.TABLE_NAME,values,courseEntry.COLUMN_SLOT_ID + "= ? AND "+courseEntry.COLUMN_DAY_ID +"= ?",selectionArgs);
+
     }
 
     private void updateCourse(){
