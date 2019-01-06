@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 import com.example.sudh.mytimetable.data.courseContract.courseEntry;
 import android.view.View;
 import android.widget.TextView;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.widget.LinearLayout;
 import android.util.Log;
@@ -105,6 +106,36 @@ public class courseHelper extends SQLiteOpenHelper{
         if(cursor.getInt(cursor.getColumnIndex(courseContract.courseEntry.IS_EMPTY))==0) slot_six.setBackgroundColor(current.getResources().getColor(R.color.not_empty));
 
         cursor.close();
+    }
+
+    public static void InitTableData(courseHelper mDbHelper){
+        String TAG = "courseHelper";
+
+        Log.d(TAG, "InitTableData: before getWritableDatabase");
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        Log.d(TAG, "InitTableData: here its cmae");
+        String count = "SELECT count(*) FROM "+ courseContract.courseEntry.TABLE_NAME;
+        Log.d(TAG, "InitTableData: problem with count");
+        Cursor mcursor = database.rawQuery(count, null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        if(icount==0) {
+            Log.d(TAG, "InitTableData: never came hereakdalfjalf");// initialise only if table is empty
+            for(int j=1;j<=5;j++){
+                for (int i = 1; i <= 6; i++) {
+                    ContentValues values = new ContentValues();
+                    values.put(courseContract.courseEntry.COLUMN_SLOT_ID, i);       // enter slot id (1 for 9am)
+                    values.put(courseContract.courseEntry.COLUMN_DAY_ID, j);        // enter day id (1 for monday)
+                    values.put(courseContract.courseEntry.COLUMN_NAME, "");
+                    values.put(courseContract.courseEntry.COLUMN_CODE, "");
+                    values.put(courseContract.courseEntry.COLUMN_ROOM, "");
+                    values.put(courseContract.courseEntry.COLUMN_PROF, "");
+                    values.put(courseContract.courseEntry.COLUMN_NOTES, "");
+
+                    database.insert(courseContract.courseEntry.TABLE_NAME, null, values);
+                }
+            }
+        }
     }
 
     public static abstract class FeedEntry implements BaseColumns {
