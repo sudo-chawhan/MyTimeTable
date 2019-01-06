@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -15,7 +14,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.example.sudh.mytimetable.data.courseContract.courseEntry;
-import com.example.sudh.mytimetable.data.courseDbHelper;
+import com.example.sudh.mytimetable.data.courseHelper;
 
 
 /**
@@ -33,7 +32,7 @@ public class EditorActivity extends AppCompatActivity {
     EditText mNotes;
 
     Intent mIntent;
-    courseDbHelper mDbHelper = new courseDbHelper(this);
+    courseHelper mDbHelper = new courseHelper(this);
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

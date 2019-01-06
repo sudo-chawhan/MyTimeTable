@@ -1,7 +1,7 @@
 package com.example.sudh.mytimetable.data;
 
 import com.example.sudh.mytimetable.R;
-import android.content.ContentValues;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -19,13 +19,13 @@ import android.util.Log;
  * Created by sudo-chawhan on 26/12/17.
  */
 
-public class courseDbHelper extends SQLiteOpenHelper{
+public class courseHelper extends SQLiteOpenHelper{
 
     public static final int database_version = 1;
     public static final String database_name = "class.db";
 
 
-    public courseDbHelper(Context context) {
+    public courseHelper(Context context) {
         super(context,database_name,null,database_version);
     }
 
@@ -41,8 +41,8 @@ public class courseDbHelper extends SQLiteOpenHelper{
 
     }
 
-    public static void displayContent(View rootView, courseDbHelper mDbHelper, int currentDayId, Context current){
-        String TAG = "courseDbHelper";
+    public static void displayContent(View rootView, courseHelper mDbHelper, int currentDayId, Context current){
+        String TAG = "courseHelper";
 
         Cursor cursor=null;
         SQLiteDatabase database = mDbHelper.getReadableDatabase();

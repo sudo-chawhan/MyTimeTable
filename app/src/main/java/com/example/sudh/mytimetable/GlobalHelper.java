@@ -1,23 +1,14 @@
 package com.example.sudh.mytimetable;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.sudh.mytimetable.data.courseContract;
-import com.example.sudh.mytimetable.data.courseDbHelper;
 
 /**
  * Created by sudo-chawhan on 06/01/19.
  */
 
 public class GlobalHelper extends AppCompatActivity {
-//    public static void displayContent(View rootView, courseDbHelper mDbHelper, int currentDayId){
-//        String TAG = "courseDbHelper";
+//    public static void displayContent(View rootView, courseHelper mDbHelper, int currentDayId){
+//        String TAG = "courseHelper";
 //
 //        Cursor cursor=null;
 //        SQLiteDatabase database = mDbHelper.getReadableDatabase();
