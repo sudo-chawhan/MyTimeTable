@@ -1,5 +1,6 @@
 package com.example.sudh.mytimetable;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -38,13 +39,13 @@ public class monFragment extends android.support.v4.app.Fragment {
         Log.d(TAG, "onCreateView: before set listener");
         setListeners();
         Log.d(TAG, "onCreateView: before display content");
-        displayContent();
+        courseDbHelper.displayContent(rootView, mDbHelper, currentDayId, getContext());
         return rootView;
     }
     @Override
     public void onStart() {
         super.onStart();
-        displayContent();
+        courseDbHelper.displayContent(rootView, mDbHelper, currentDayId, getContext());
     }
 
     public void setListeners(){
@@ -173,7 +174,7 @@ public class monFragment extends android.support.v4.app.Fragment {
         String[] selectionArgs = new String[]{
                 String.valueOf(currentDayId)                           //////// get cursor depending on which day it is
         };
-        cursor = database.query(courseContract.courseEntry.TABLE_NAME,columns, courseContract.courseEntry.COLUMN_DAY_ID+"=?",selectionArgs,null,null,null);
+        cursor = database.query(courseContract.courseEntry.TABLE_NAME, columns, courseContract.courseEntry.COLUMN_DAY_ID+"=?",selectionArgs,null,null,null);
         cursor.moveToFirst();
         // set the layout fields according to data values
         one_name.setText(cursor.getString(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_NAME)));
