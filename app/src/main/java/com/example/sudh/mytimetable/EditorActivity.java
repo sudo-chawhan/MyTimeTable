@@ -80,7 +80,7 @@ public class EditorActivity extends AppCompatActivity {
         String prof = "";
         String notes = "";
         Log.d(TAG, "updateCourse: string value is name "+name);
-        if(TextUtils.isEmpty(name)&&TextUtils.isEmpty(room)) isEmpty=1;
+        if(TextUtils.isEmpty(name)) isEmpty=1;
         ContentValues values = new ContentValues();
         values.put(courseEntry.COLUMN_NAME,name);
         values.put(courseEntry.COLUMN_CODE,code);

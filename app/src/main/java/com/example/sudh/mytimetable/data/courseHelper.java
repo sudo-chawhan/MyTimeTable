@@ -45,11 +45,6 @@ public class courseHelper extends SQLiteOpenHelper{
     public static void displayContent(View rootView, courseHelper mDbHelper, int currentDayId, Context current){
         String TAG = "courseHelper";
 
-        Cursor cursor=null;
-        SQLiteDatabase database = mDbHelper.getReadableDatabase();
-        String[] columns = new String[]{
-                courseContract.courseEntry.COLUMN_NAME, courseContract.courseEntry.COLUMN_ROOM, courseContract.courseEntry.IS_EMPTY
-        };
         Log.d(TAG, "displayContent: i came here");
         TextView one_name = (TextView) rootView.findViewById(R.id.slot_one_course);
         TextView one_room = (TextView) rootView.findViewById(R.id.slot_one_class);
@@ -70,10 +65,16 @@ public class courseHelper extends SQLiteOpenHelper{
         LinearLayout slot_five = (LinearLayout) rootView.findViewById(R.id.slot_five);
         LinearLayout slot_six = (LinearLayout) rootView.findViewById(R.id.slot_six);
 
+        Cursor cursor=null;
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        String[] columns = new String[]{
+                courseContract.courseEntry.COLUMN_NAME, courseContract.courseEntry.COLUMN_ROOM, courseContract.courseEntry.IS_EMPTY
+        };
+
         String[] selectionArgs = new String[]{
                 String.valueOf(currentDayId)                           //////// get cursor depending on which day it is
         };
-        cursor = database.query(courseContract.courseEntry.TABLE_NAME, columns, courseContract.courseEntry.COLUMN_DAY_ID+"=?",selectionArgs,null,null,null);
+        cursor = database.query(courseContract.courseEntry.TABLE_NAME, columns, courseContract.courseEntry.COLUMN_DAY_ID+"=?", selectionArgs,null,null,null);
         cursor.moveToFirst();
         // set the layout fields according to data values
         one_name.setText(cursor.getString(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_NAME)));
@@ -106,6 +107,11 @@ public class courseHelper extends SQLiteOpenHelper{
         if(cursor.getInt(cursor.getColumnIndex(courseContract.courseEntry.IS_EMPTY))==0) slot_six.setBackgroundColor(current.getResources().getColor(R.color.not_empty));
 
         cursor.close();
+    }
+
+    public static courseHelper getDbHelper(Context context){
+        courseHelper mDbHelper = new courseHelper(context);
+        return mDbHelper;
     }
 
     public static void InitTableData(courseHelper mDbHelper){
