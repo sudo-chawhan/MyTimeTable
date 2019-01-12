@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 
 import com.example.sudh.mytimetable.data.courseHelper;
 
+import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
@@ -18,14 +20,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-
         DaysManager adapter = new DaysManager(this, getSupportFragmentManager());
-
         viewPager.setAdapter(adapter);
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
+        int currentPosition = getCurrentDay();
+        viewPager.setCurrentItem(currentPosition);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public int getCurrentDay(){
+        return Calendar.DAY_OF_WEEK - 1;
     }
 
 
