@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.example.sudh.mytimetable.data.courseHelper;
 
@@ -29,15 +30,22 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         DaysManager adapter = new DaysManager(this, getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        Log.d(TAG, "onCreate: here 1.0");
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         int currentPosition = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
         viewPager.setCurrentItem(currentPosition);
         tabLayout.setupWithViewPager(viewPager);
-
+        Log.d(TAG, "onCreate: here 1.1");
         createNotificationChannel();
 
-        setAlarm(getApplicationContext());
+//        setAlarm(getApplicationContext());
 
+        //
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        Log.d(TAG, "onCreate: here 1.2");
+        notificationManager.notify(GlobalConstants.reminder_notification_id, DaysNotificationPublisher.makeNotification(getApplicationContext()));
+        //
+        Log.d(TAG, "onCreate: here 1.3");
     }
 
     private void setAlarm(Context context){
@@ -51,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         // get a Calendar object with current time
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, alarmHr);
-        calendar.set(Calendar.MINUTE, alarmMn);
+//        calendar.set(Calendar.HOUR_OF_DAY, alarmHr);
+//        calendar.set(Calendar.MINUTE, alarmMn);
 
         AlarmManager am = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
 
