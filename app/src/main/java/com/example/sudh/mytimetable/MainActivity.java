@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         Log.d(TAG, "onCreate: here 1.2");
-        notificationManager.notify(GlobalConstants.reminder_notification_id, DaysNotificationPublisher.makeNotification(getApplicationContext()));
+        notificationManager.notify(GlobalHelper.reminder_notification_id, DaysNotificationPublisher.makeNotification(getApplicationContext()));
         //
         Log.d(TAG, "onCreate: here 1.3");
     }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             CharSequence name = "helloName";
             String description = "Notification for notify";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(GlobalConstants.reminder_channel_id, name, importance);
+            NotificationChannel channel = new NotificationChannel(GlobalHelper.reminder_channel_id, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this

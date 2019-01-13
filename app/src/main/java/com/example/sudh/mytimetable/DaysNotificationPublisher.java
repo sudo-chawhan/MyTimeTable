@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,7 +37,7 @@ public class DaysNotificationPublisher extends BroadcastReceiver {
 
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-            notificationManager.notify(GlobalConstants.reminder_notification_id, makeNotification(context));
+            notificationManager.notify(GlobalHelper.reminder_notification_id, makeNotification(context));
         }
     }
 
@@ -52,7 +51,7 @@ public class DaysNotificationPublisher extends BroadcastReceiver {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, GlobalConstants.reminder_channel_id)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, GlobalHelper.reminder_channel_id)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Reminder")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -76,22 +75,28 @@ public class DaysNotificationPublisher extends BroadcastReceiver {
         cursor = database.query(courseContract.courseEntry.TABLE_NAME, columns, courseContract.courseEntry.COLUMN_DAY_ID+"=?", selectionArgs,null,null,null);
         cursor.moveToFirst();
 
-        String contentText = "";
+        NotificationCompat.InboxStyle nItems = new NotificationCompat.InboxStyle();
+
+        String contentText = "Tomorrow first class at ";
         Log.d(TAG, "makeNotification: here 2.1");
         boolean foundNone = true;
         for(int i=0; i<cursor.getCount(); i++){
 //            Log.d(TAG, "makeNotification: cursor empty is " + cursor.getColumnIndex(courseContract.courseEntry.IS_EMPTY));
             if(cursor.getInt(cursor.getColumnIndex(courseContract.courseEntry.IS_EMPTY))==0){
+                String slotString = GlobalHelper.getStringSlotTime(cursor.getInt(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_SLOT_ID)));
+                if(foundNone) contentText += slotString;
                 foundNone = false;
-                contentText += cursor.getString(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_NAME));
+                String itemText = slotString + " - ";
+                itemText += cursor.getString(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_NAME));
                 String room = cursor.getString(cursor.getColumnIndex(courseContract.courseEntry.COLUMN_ROOM));
-                if(!TextUtils.isEmpty(room)) contentText += " in " + room;
-                contentText += "\n";
+                if(!TextUtils.isEmpty(room)) itemText += " in " + room;
+                nItems.addLine(itemText);
             }
             cursor.moveToNext();
         }
         Log.d(TAG, "makeNotification: here 2.2");
         if(foundNone) contentText = "Yippee! No class tomorrow";
+        else mBuilder.setStyle(nItems);
         ///
 
         mBuilder.setContentText(contentText);
